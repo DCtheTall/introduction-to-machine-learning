@@ -1,6 +1,6 @@
 """
-Chapter 1
----------
+Calling library functions used in examples
+in the book
 
 """
 

@@ -33,7 +33,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # print 'X_train shape: {x}\ny_train shape: {y}'.format(x=X_train.shape, y=y_train.shape)
 
 
-iris_dataframe = pd.DataFrame(X_train, columns=iris_dataset.feature_names)
+iris_dataframe = pd.DataFrame(X_train, columns=iris_dataset['feature_names'])
 pd.plotting.scatter_matrix(
   iris_dataframe,
   c=y_train,
