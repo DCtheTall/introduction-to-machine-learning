@@ -107,3 +107,5 @@ axes[0].legend([
   'Test data/target',
 ], loc='best')
 plt.show()
+# Comparing regression when looking at varying numbers of
+# nearest neighboars
