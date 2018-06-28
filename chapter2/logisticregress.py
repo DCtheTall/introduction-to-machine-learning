@@ -148,9 +148,10 @@ for coef, intercept, color in zip(
   linear_svm.intercept_,
   mglearn.cm3.colors,
 ):
-  plt.plot(line, -(line * coef[0] + intercept) / coef[1], c=color)
-plt.legend(['Class 0', 'Class 1', 'Class 2', 'Line Class 0', 'Line Class 1', 'Line Class 2'], loc=(1.01, .3))
-plt.xlabel('Feature 0')
-plt.ylabel('Feature 1')
-plt.show()
+  pass
+  # plt.plot(line, -(line * coef[0] + intercept) / coef[1], c=color)
+# plt.legend(['Class 0', 'Class 1', 'Class 2', 'Line Class 0', 'Line Class 1', 'Line Class 2'], loc=(1.01, .3))
+# plt.xlabel('Feature 0')
+# plt.ylabel('Feature 1')
+# plt.show()
 # Plots the decision boundaries for the multi-class classifier
