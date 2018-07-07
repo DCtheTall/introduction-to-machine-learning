@@ -50,4 +50,4 @@ X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
 y = np.array([0, 0, 0, 1, 1, 1])
 clf = GaussianNB().fit(X, y)
 print clf.predict([[-0.8, -1]])
-# GaussianNB can classify data with real-valued feature vectores
+# GaussianNB can classify data with real-valued feature vectors
