@@ -159,9 +159,9 @@ knn = KNeighborsClassifier(n_neighbors=1).fit(X_train_pca, y_train)
 # Plot reconstruction of faces using PCA
 
 
-mglearn.discrete_scatter(X_train_pca[:, 0], X_train_pca[:, 1], y_train)
-plt.xlabel('First principal component')
-plt.ylabel('Second principal component')
-plt.show()
+# mglearn.discrete_scatter(X_train_pca[:, 0], X_train_pca[:, 1], y_train)
+# plt.xlabel('First principal component')
+# plt.ylabel('Second principal component')
+# plt.show()
 # 2D scatter plot of 2 principal components
 # not much to gather from it, very non-linear
