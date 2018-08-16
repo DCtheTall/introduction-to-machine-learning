@@ -22,7 +22,7 @@ eye = np.eye(4)
 
 
 """
-On spare matrices: https://en.wikipedia.org/wiki/Sparse_matrix
+On sparce matrices: https://en.wikipedia.org/wiki/Sparse_matrix
 
 """
 
