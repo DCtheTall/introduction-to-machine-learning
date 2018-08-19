@@ -57,15 +57,60 @@ line_binned = encoder.transform(np.digitize(line, bins=bins))
 reg = LinearRegression().fit(X_binned, y)
 plt.plot(line, reg.predict(line_binned), label='Linear regression binned')
 reg = DecisionTreeRegressor(min_samples_split=3).fit(X_binned, y)
-plt.plot(line, reg.predict(line_binned), label='Decision tree binned')
-plt.plot(X[:,0], y, 'o', c='k')
-plt.vlines(bins, -3, 3, linewidth=1, alpha=.2)
-plt.legend(loc='best')
-plt.ylabel('Regression output')
-plt.xlabel('Input feature')
-plt.show()
+# plt.plot(line, reg.predict(line_binned), label='Decision tree binned')
+# plt.plot(X[:,0], y, 'o', c='k')
+# plt.vlines(bins, -3, 3, linewidth=1, alpha=.2)
+# plt.legend(loc='best')
+# plt.ylabel('Regression output')
+# plt.xlabel('Input feature')
+# plt.show()
 # Now the two lines are right on top of each other
 # Binning data seems to help linear models make better predictions
 # but it made the decision tree perform worse
 # Decision trees in general can learn what bins to put data in
 # based on multiple features
+
+
+X_combined = np.hstack([X, X_binned])
+# print X_combined.shape
+# One way to improve the linear model after binning is to add
+# slopes back to the bins using np.hstack
+
+
+reg = LinearRegression().fit(X_combined, y)
+line_combined = np.hstack([line, line_binned])
+# plt.plot(line, reg.predict(line_combined), label='Linear regression combined')
+# for b in bins:
+#   plt.plot([b, b], [-3, 3], ':', c='k', linewidth=1)
+# plt.legend(loc='best')
+# plt.ylabel('Regression output')
+# plt.xlabel('Input feature')
+# plt.plot(X[:,0], y, 'o', c='k')
+# plt.show()
+# The linear regression learned to separate the
+# data into each bin and it learned a shared slope
+# across all bins. This is less preferable than
+# finding a separate slope across all bins
+
+
+X_product = np.hstack([X_binned, X * X_binned])
+# print X_product.shape
+# We can achieve separate slopes for each bin by
+# taking a product of each bin indicator with
+# the original input feature
+# Each point has 20 features now, 10 indicate
+# which bin its in and the other 10 are the corresponding
+# products with the original input feature
+
+
+reg = LinearRegression().fit(X_product, y)
+line_product = np.hstack([line_binned, line * line_binned])
+plt.plot(line, reg.predict(line_product), label='linear regression product')
+for b in bins:
+  plt.plot([b, b], [-3, 3], ':', c='k', linewidth=1)
+plt.plot(X[:, 0], y, 'o', c='k')
+plt.ylabel('Regression output')
+plt.xlabel('Input feature')
+plt.legend(loc='best')
+plt.show()
+# This time, each bin has its own slope
