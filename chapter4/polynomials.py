@@ -10,12 +10,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import mglearn
 from IPython.display import display
-from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import PolynomialFeatures, MinMaxScaler
 from sklearn.linear_model import LinearRegression, Ridge
 from sklearn.svm import SVR
 from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestRegressor
 
 
