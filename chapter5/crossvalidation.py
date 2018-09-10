@@ -10,7 +10,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import mglearn
 from IPython.display import display
-from sklearn.model_selection import cross_val_score, KFold, LeaveOneOut, ShuffleSplit, GroupKFold
+from sklearn.model_selection import (
+  cross_val_score,
+  KFold,
+  LeaveOneOut,
+  ShuffleSplit,
+  GroupKFold,
+)
 from sklearn.datasets import load_iris, make_blobs
 from sklearn.linear_model import LogisticRegression
 

@@ -142,6 +142,7 @@ svm = SVC(kernel='rbf', C=10, gamma=0.1).fit(X, y)
 # High values of gamma means fewer points can influence the decision boundary
 # High values of the regularization parameter C mean less regularization
 
+
 cancer = load_breast_cancer()
 X_train, X_test, y_train, y_test = train_test_split(
   cancer.data, cancer.target, random_state=0

@@ -41,11 +41,9 @@ gbrt = GradientBoostingClassifier(random_state=0).fit(X_train, y_train_named)
 
 
 # print 'Thresholded decision function:\n{}'.format(
-#     gbrt.decision_function(X_test) > 0
-# )
+#     gbrt.decision_function(X_test) > 0)
 # print 'Predictions:\n{}'.format(
-#     gbrt.predict(X_test)
-# )
+#     gbrt.predict(X_test))
 # Decision fn result > 0 implies that its in class 0, less than 0 implies class 1
 
 
