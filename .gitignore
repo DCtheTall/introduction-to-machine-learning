@@ -3,3 +3,4 @@
 *.dot
 *.png
 cache
+.DS_Store
