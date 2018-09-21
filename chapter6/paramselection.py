@@ -45,6 +45,7 @@ grid.fit(X_train_scaled, y_train)
 # The catch here is that the grid search splits the training set to test
 # for the best parameters. But the scaling used all of the training set,
 # which is fundamentally different from how the model gets new data.
+# This training data has been included in the scaling
 
 
 # mglearn.plots.plot_improper_processing()
