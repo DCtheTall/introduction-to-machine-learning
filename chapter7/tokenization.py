@@ -92,4 +92,3 @@ print 'Best cross-validation score (lemmatization): {:.3f}'.format(grid.best_sco
 # Here we observe a modest boost in performance even when training with a small dataset
 # when we use lemmatization for tokenization of words instead of using the literal string
 # value
-# We see it adds a modest boost to performance
