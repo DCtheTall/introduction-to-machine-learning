@@ -1,4 +1,4 @@
-<a href="https://www.amazon.com/Introduction-Machine-Learning-Python-Scientists/dp/1449369413"><img alt="Introduction to Machine Learning with Python Cover" src="./cover.png" style="width: 200px; height: auto; padding: 10px;"></a>
+<a href="https://www.amazon.com/Introduction-Machine-Learning-Python-Scientists/dp/1449369413"><img alt="Introduction to Machine Learning with Python Cover" src="/cover.png" style="width: 200px; height: auto; padding: 10px;"></a>
 
 Code examples from:
 # Introduction to Machine Learning with Python
