@@ -24,7 +24,7 @@ y = np.array([0, 1, 0, 1])
 counts = {}
 for label in np.unique(y):
   counts[label] = X[y == label].sum(axis=0)
-# print 'Feature counts:\n{}'.format(counts)
+print 'Feature counts:\n{}'.format(counts)
 # Example in the book to show how
 # BernoulliMB aggregates features
 
@@ -33,16 +33,16 @@ X = np.random.randint(2, size=(1000, 1000))
 y = np.random.randint(5, size=1000)
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 clf = BernoulliNB(alpha=100.).fit(X_train, y_train)
-# print 'Training set score: {:.3f}'.format(clf.score(X_train, y_train))
-# print 'Test set score: {:.3f}'.format(clf.score(X_test, y_test))
+print 'Training set score: {:.3f}'.format(clf.score(X_train, y_train))
+print 'Test set score: {:.3f}'.format(clf.score(X_test, y_test))
 # BernoulliNB classifies a set of data points with vectors of binary features (0 or 1)
 
 
 X = np.random.randint(5, size=(1000, 1000))
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 clf = MultinomialNB(alpha=1000.).fit(X_train, y_train)
-# print 'Training set score: {:.3f}'.format(clf.score(X_train, y_train))
-# print 'Test set score: {:.3f}'.format(clf.score(X_test, y_test))
+print 'Training set score: {:.3f}'.format(clf.score(X_train, y_train))
+print 'Test set score: {:.3f}'.format(clf.score(X_test, y_test))
 # MultinomialNB classifies a set of discrete data points with vectors of discrete features
 
 

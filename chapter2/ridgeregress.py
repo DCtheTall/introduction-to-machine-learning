@@ -20,22 +20,22 @@ from linregress import lr
 X, y = mglearn.datasets.load_extended_boston()
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 ridge = Ridge().fit(X_train, y_train)
-# print 'Train score: {:.2f}'.format(ridge.score(X_train, y_train)) # .89
-# print 'Test score: {:.2f}'.format(ridge.score(X_test, y_test)) # .75
+print 'Train score: {:.2f}'.format(ridge.score(X_train, y_train)) # .89
+print 'Test score: {:.2f}'.format(ridge.score(X_test, y_test)) # .75
 # Ridge intentionally dampens the effect of each attribute on the
 # prediction to avoid overfitting
 
 
 ridge10 = Ridge(alpha=10).fit(X_train, y_train)
-# print 'Train test score: {:.2f}'.format(ridge10.score(X_train, y_train)) # .79
-# print 'Test test score: {:.2f}'.format(ridge10.score(X_test, y_test)) # .64
+print 'Train test score: {:.2f}'.format(ridge10.score(X_train, y_train)) # .79
+print 'Test test score: {:.2f}'.format(ridge10.score(X_test, y_test)) # .64
 # You can add a regularization term (alpha) to fit to your particular model
 # In this case alpha=10 doesn't help
 
 
 ridge01 = Ridge(alpha=0.1).fit(X_train, y_train)
-# print 'Train test score: {:.2f}'.format(ridge01.score(X_train, y_train))  # .93
-# print 'Test test score: {:.2f}'.format(ridge01.score(X_test, y_test))  # .77
+print 'Train test score: {:.2f}'.format(ridge01.score(X_train, y_train))  # .93
+print 'Test test score: {:.2f}'.format(ridge01.score(X_test, y_test))  # .77
 # It appears lowering the alpha to 0.1 was useful here
 
 
