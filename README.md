@@ -1,4 +1,4 @@
-<a href="https://www.amazon.com/Introduction-Machine-Learning-Python-Scientists/dp/1449369413"><img alt="Introduction to Machine Learning with Python Cover" src="./cover.png" style="width: 200px; height: auto; padding: 10px;"></a>
+<a style="width: 200px" href="https://www.amazon.com/Introduction-Machine-Learning-Python-Scientists/dp/1449369413"><img alt="Introduction to Machine Learning with Python Cover" src="./cover.png" style="width: 200px; height: auto; padding: 10px;"></a>
 
 Code examples from:
 # Introduction to Machine Learning with Python
@@ -43,7 +43,7 @@ is a table of content with links to each algorithm covered by the code.
 1. [k-Nearest Neighbors](#k-nearest-neighbors)
 2. [Linear Regression](#linear-regression)
 3. [Ridge Regression](#ridge-regression)
-4. [Lasso Regression](#lasso)
+4. [Lasso Regression](#lasso-regression)
 4. [LogisticRegression](#logistic-regression)
 5. [Naive Bayes Classifiers](#naive-bayes-classifiers)
 6. [Decision Trees](#decision-trees)
@@ -66,6 +66,9 @@ The parameters covered in this repo are:
 
 - `n_neighbors` The number of neighbors taken into consideration.
 
+kNN is a good model for small datasets and sets a good baseline. It is
+also very easy to explain this model to a layman.
+
 #### Linear Regression
 
 Linear regression is a well-known algorithm which tries to find
@@ -76,7 +79,9 @@ its ouput.
 
 Ridge regression is a form of linear regression which dampens
 the impact of features whose coefficients in linear regression
-are far from 0.
+are far from 0. This is done to prevent _over-fitting_, training
+your model to make predictions too close to the training data
+in order to generalize to new data.
 
 The parameters covered in this repo are:
 
@@ -107,6 +112,9 @@ The parameters covered in this repo are:
 the Euclidean metric (ridge regression). The code also has an example of using the
 L1 metric (lasso regression).
 
+Linear models are a good first algorithm to try for very large datasets where
+the feature vector has a very high dimension.
+
 #### Naive Bayes Classifiers
 
 This repo has 3 examples of naive bayes classifiers:
@@ -117,11 +125,14 @@ This repo has 3 examples of naive bayes classifiers:
 
 3. **GaussianNB:** This classifier works on data where the feature set is a real-valued vector.
 
+Naive Bayes Classifiers are good for classification only, and are much faster than linear models.
+Though the trade-off is that they tend to be less accurate.
+
 #### Decision Trees
 
 Decision trees are a type of classifier which classifies data using a series
 of conditionals. It can be fit to training data perfectly, but in this case
-is unable to generalize.
+is unable to generalize (a severe case of over-fitting).
 
 One way to improve the generalization performance is to set a max depth for
 the tree. This is called _pruning_ the tree.
@@ -143,7 +154,9 @@ Parameters for `RandomForestClassifier` covered in this repo are:
 - `n_estimators` which controls the number of decision trees trained in the ensemble.
 
 Gradient boosted decision trees are an ensemble which learn from each previous
-tree. These trees can generalize very well without any parameter tuning.
+tree. These trees can generalize very well without any parameter tuning. They usually
+do require some tuning, though once trained they can be more accurate and less
+memory intensive than random forests.
 
 The parameters covered in this repo are:
 
@@ -161,6 +174,9 @@ The parameters covered are:
 - `gamma` Higher values of `gamma` mean less points can influence the decision
 - `C` Higher values of `C` mean there will be less regularization
 
+SVMs are good for medium-size datasets with features with similar meaning. They
+do require you to scale your data and are sensitive to their tuning parameters.
+
 #### Neural Networks
 
 Neural networks are a famous classifying algorithm which work by
@@ -177,6 +193,9 @@ The parameters covered for neural networks are:
 - `hidden_layers` a list of integers which determines how many hidden layers and how many hidden nodes the neural network will use.
 - `alpha` a regularization constant for each step of linear regression
 
+Neural networks take a long time to train, but can make very accurate decisions, particularly with large datasets.
+They are sensitive to tuning parameteres and the data should be scaled.
+
 #### Predicting Uncertainty
 
 One way to measure the uncertainty of a classifier is
@@ -188,4 +207,123 @@ predictions for each point in the input.
 
 ---
 
-TODO Chapters 3-8
+## Chapter 3
+### Unsupervised Learning
+
+This chapter covers unsupervised learning algorithms, a class of
+algorithms meant to run on data where there is no known output
+and no training data to instruct the algorithm on what results
+are correct. Rather these algorithms extract some knowledge
+about the data or transform the data in a way which will help
+a supervised algorithm.
+
+The unsupervised learning algorithms in this repo are:
+
+1. [Preprocessing and Scaling](#preprocessing-and-scaling)
+2. [Principal Component Analysis](#principal-component-analysis)
+3. [Non-negative Matrix Factorization](#non-negative-matrix-factorization)
+4. [Manifold Learning](#manifold-learning)
+5. [k-Means Clustering](#k-means-clustering)
+6. [Agglomerative Clustering](#agglomerative-clustering)
+7. [DBSCAN](#dbscan)
+8. [Comparing Clustering Algorithms](#comparing-clustering-algorithms)
+
+#### Preprocessing and Scaling
+
+`sklearn` provides scaling transformers in the `sklearn.preprocessing`
+module which can transform data before the data is used to train
+a supervised model.
+
+`MinMaxScaler` maps each feature to the interval [0, 1], where
+the minimum value of that feature in the dataset and 1 is the
+maximum.
+
+A simplified implementation of the transformation done by `StandardScaler` is done
+below:
+
+```
+min_on_training = X_train.min(axis=0)
+range_on_training = (X_train - min_on_training).max(axis=0)
+X_train_scaled = (X_train - min_on_training) / range_on_training
+```
+
+where `X_train` is the data used to train the transformer.
+
+#### Principal Component Anaylsis
+
+Principal Component Analysis (PCA) is a technique to reduce a high dimensional
+dataset into a feature vector with a specified number of components.
+
+As a preprocessing step, PCA can increase the accuracy of even simple
+models noticeably.
+
+It is usually hard to interpret the relationship between the original
+features and the components.
+
+The examples from this section in `pca.py` also are the first example
+of using these techniques on image data.
+
+#### Non-negative Matrix Factorization
+
+Non-negative matrix factorization is similar to principal component analysis
+except it does not work on negative-valued features.
+
+`nmf.py` compares PCA with NMF. We also see that NMF is much better than
+PCA at signal recovery.
+
+#### Manifold Learning
+
+Manifold learning (t-SNE) is another dimensionality reduction algorithm
+which starts with a 2-dimensional representation of the data and tries
+to emphasize relationships between neighboring points in the new
+representation. This algorithm can find classifications in data
+unsupervised, an example of t-SNE on handwritten digits in `tsne.py`.
+
+Manifold learning is mainly used for exploratory analysis on training
+data and is not used for preprocessing test data for generalization.
+
+#### k-Means Clustering
+
+k-Means Clustering classifies data by first computing _k_ mean
+data points which minimize the distance between the computed
+mean and the nearest neighbors.
+
+k-Means Clustering is not good for complex data shapes, it
+works best on well separated clusters that are simply shaped.
+
+`kmeans.py` shows an example of how k-means clustering performs
+on differently shaped datasets, including the face image data.
+
+#### Agglomerative Clustering
+
+Agglomerative clustering joins near neighbors until the
+dataset is grouped into a specified number of clusters.
+
+`aggomclustering.py` contains examples of agglomerative
+clustering on datasets represented by scatter plots.
+
+#### DBSCAN
+
+DBSCAN is a clustering algorithm which can find how many
+clusters are best for the dataset _a priori_. It starts
+with finding data points that are close together and find
+clusters based on how data is grouped together.
+
+DBSCAN is a powerful clustering algorithm which can classify
+even complex-shaped datasets. `dbscan.py` shows examples
+of how it capable of properly clustering the two moons `sklearn`
+dataset.
+
+#### Comparing Clustering Algorithms
+
+`compareclustering.py` shows how the different clustering
+algorithms compare using a number of metrics:
+
+- **Adjusted Random Index (ARI)** is a value in [0, 1] which gives a measure of how related the clusters are. Random classification will score a 0, in the example in the code, DBSCAN scores a 1.
+- **Silhouette Score** is a metric of how close together the clusters are.
+
+It also compares how the different algorithms cluster face image data.
+
+----
+
+TODO Chapter 4-8

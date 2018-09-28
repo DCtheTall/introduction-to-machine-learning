@@ -15,25 +15,25 @@ from sklearn.datasets import make_blobs
 from scipy.cluster.hierarchy import dendrogram, ward
 
 
-# mglearn.plots.plot_agglomerative_algorithm()
-# plt.show()
+mglearn.plots.plot_agglomerative_algorithm()
+plt.show()
 # Plot diagram of agglomerative clustering in action
 
 
-# X, y = make_blobs(random_state=1)
-# agg = AgglomerativeClustering(n_clusters=3)
-# assignment = agg.fit_predict(X)
-# mglearn.discrete_scatter(X[:, 0], X[:, 1], assignment)
-# plt.legend(['Cluster 0', 'Cluster 1', 'Custer 2'], loc='best')
-# plt.xlabel('Feature 0')
-# plt.ylabel('Feature 1')
-# plt.show()
+X, y = make_blobs(random_state=1)
+agg = AgglomerativeClustering(n_clusters=3)
+assignment = agg.fit_predict(X)
+mglearn.discrete_scatter(X[:, 0], X[:, 1], assignment)
+plt.legend(['Cluster 0', 'Cluster 1', 'Custer 2'], loc='best')
+plt.xlabel('Feature 0')
+plt.ylabel('Feature 1')
+plt.show()
 # Agglomerative clustering perfectly classifies
 # 3 well-defined blobs of data points
 
 
-# mglearn.plots.plot_agglomerative()
-# plt.show()
+mglearn.plots.plot_agglomerative()
+plt.show()
 # Shows step by step how the clustering algorithm
 # combines clusters
 
