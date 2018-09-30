@@ -415,4 +415,89 @@ model performance.
 
 ---
 
-TODO Chapter 5-8
+## Chapter 5
+### Model Evaluation and Improvement
+
+This chapter contains techniques for automating the process of tuning your
+model parameters for your dataset. It also provides alternative metrics
+besides just the R^2 score for measuring model performance.
+
+The sections of this chapter are broken down into:
+
+1. [Cross Validation](#cross-validation)
+2. [Grid Search](#grid-search)
+3. [Model Evaluation](#evaluation-metrics)
+4. [Multiclass Metrics](#multiclass-metrics)
+5. [Model Selection](#model-selection)
+
+#### Cross Validation
+
+Cross validation takes the training data and performs a second
+train_test_split on the different parts of the training data, and
+compares how models perform when trained and tested against those
+
+`crossvalidation.py` shows an example of this analysis. It also
+shows different methods of splitting the data such as `KFold` and
+`LeaveOneOut`.
+
+#### Grid Search
+
+Grid Search is a method of tuning model parameters. You specify which parameter values
+you want to test the accuracy with, and then you do a cross validation test on each
+possible configuration that you supply.
+
+`gridsearch.py` has an example of performing a grid search analysis to train a supervised
+model. It also has an example of plotting the results of a 2D grid search as a heatmap
+to better visualize the result.
+
+Grid search is computationally expensive, since you have to train one model per possible
+config per split in the cross-validation.
+
+#### Model Evaluation
+
+`modelevaluation.py` covers other metrics besides the R^2 score to evaluate the accuracy
+of a model for binary classification. For some imbalanced datasets, accuracy can paint
+a deceptive picture of how well a model performs compared to random guessing.
+
+It introduces the _confusion matrix_ which shows the number of true negatives (TN),
+false negatives (FN), true positives, and false positives (FP).
+
+- Accuracy is given by: `(TP + TN) / (TP + TN + FP + FN)`
+- Precision is given by: `TP / (TP + FP)`
+- Recall is given by: `TP / (TP + FN)`
+
+You can read more on what the latter 2 metrics mean [in this article](https://en.wikipedia.org/wiki/Sensitivity_and_specificity).
+
+This code has an example of using the `classification_report` method in the
+`sklearn.metrics` module which shows the accuracy, precision, recall, and F1
+score of a classifier, where an F1 score, the _harmonic mean_ of the precision
+and recall.
+
+Another metric this section covers is the Receiver Operating Characteristics (ROC) curve
+which plots the _true positive rate_ (TPR) as a function of the _false positive rate_ (FPR).
+
+- False positive rate: `FP / (FP + TN)`
+- True positive rate: `TP / (TP + FN)`
+
+You may have noticed that TPR and recall are the same. A single number which one can gather
+from the ROC curve is the area under the curve (AUC) which gives an idea how well the model
+performed.
+
+#### Multiclass Metrics
+
+`multiclassmetrics.py` shows examples of the analysis on the performance of classification
+models where the output can be more than 2 possible classes.
+
+It shows an example of the confusion matrix of a multiclass problem and analyzing the
+precision, recall, and F1 score of the model.
+
+#### Model Selection
+
+`modelselection.py` shows an example of using grid search with ROC AUC as the scoring
+metric to select a model which classifies handwritten digits as 9's or any other digit
+(an example of an imbalanced dataset). It also illustrates how accuracy is not a good
+success metric for this particular problem.
+
+---
+
+TODO Chapter 6-8

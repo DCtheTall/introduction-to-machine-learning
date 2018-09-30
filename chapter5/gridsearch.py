@@ -26,9 +26,9 @@ POWERS_OF_TEN = [10 ** n for n in range(-3, 3)]
 
 iris = load_iris()
 X_train, X_test, y_train, y_test = \
-  train_test_split(iris.data, iris.target, random_state=0)
-# print 'Size of training set: {} Size of the test set: {}'.format(
-#   X_train.shape[0], X_test.shape[0])
+  train_test_split(iris['data'], iris['target'], random_state=0)
+print 'Size of training set: {} Size of the test set: {}'.format(
+  X_train.shape[0], X_test.shape[0])
 best_score = 0
 for gamma in POWERS_OF_TEN:
   for C in POWERS_OF_TEN:
@@ -37,8 +37,8 @@ for gamma in POWERS_OF_TEN:
     if score > best_score:
       best_score = score
       best_parameters = {'C': C, 'gamma': gamma}
-# print 'Best score: {}'.format(best_score)
-# print 'Best parameters: {}'.format(best_parameters)
+print 'Best score: {}'.format(best_score)
+print 'Best parameters: {}'.format(best_parameters)
 # Here we are finding the best tuning parameters for the support
 # vector classifier on the iris dataset, finding the parameters
 # which lead to the best performance on the test set
@@ -49,10 +49,10 @@ X_trainval, X_test, y_trainval, y_test = \
 X_train, X_valid, y_train, y_valid = \
   train_test_split(X_trainval, y_trainval, random_state=1)
 set_size = lambda x: x.shape[0]
-# print ('Size of training set: {}' \
-#   + ' Size of validation set: {} ' \
-#   + ' Size of test: {}').format(
-#     set_size(X_train), set_size(X_valid), set_size(X_test))
+print ('Size of training set: {}' \
+  + ' Size of validation set: {} ' \
+  + ' Size of test: {}').format(
+    set_size(X_train), set_size(X_valid), set_size(X_test))
 best_score = 0
 for gamma in POWERS_OF_TEN:
   for C in POWERS_OF_TEN:
@@ -63,9 +63,9 @@ for gamma in POWERS_OF_TEN:
       best_parameters = {'C': C, 'gamma': gamma}
 svm = SVC(**best_parameters).fit(X_trainval, y_trainval)
 best_test_score = svm.score(X_test, y_test)
-# print 'Best validation score: {:.3f}'.format(best_score)
-# print 'Best parameters: {}'.format(best_parameters)
-# print 'Test set accuracy with best parameters: {:.3f}'.format(best_test_score)
+print 'Best validation score: {:.3f}'.format(best_score)
+print 'Best parameters: {}'.format(best_parameters)
+print 'Test set accuracy with best parameters: {:.3f}'.format(best_test_score)
 # Here the dataset is split into 3 sets:
 # - The training set, same use as always
 # - The validation set, used as a test set to find best params
@@ -83,15 +83,15 @@ for gamma in POWERS_OF_TEN:
       best_score = score
       best_parameters = {'C': C, 'gamma': gamma}
 svm = SVC(**best_parameters).fit(X_trainval, y_trainval)
-# print 'Test set accuracy with best parameters: {:.3f}'.format(best_test_score)
+print 'Test set accuracy with best parameters: {:.3f}'.format(best_test_score)
 # Here we can use cross validation to select the best
 # set of parameters with a varied splitting of the test/validation set
 # The drawback is this is very computationally complex, as it
 # trains 5 models for each element in the parameter grid
 
 
-# mglearn.plots.plot_grid_search_overview()
-# plt.show()
+mglearn.plots.plot_grid_search_overview()
+plt.show()
 # Flow diagram of grid search (see page 267)
 
 
@@ -99,7 +99,7 @@ param_grid = {
   'C': POWERS_OF_TEN,
   'gamma': POWERS_OF_TEN,
 }
-# print 'Parameter grid:\n{}'.format(param_grid)
+print 'Parameter grid:\n{}'.format(param_grid)
 # One can construct a parameter grid using a dictionary like above
 
 
@@ -107,44 +107,44 @@ grid_search = GridSearchCV(SVC(), param_grid, cv=5)
 X_train, X_test, y_train, y_test = \
   train_test_split(iris.data, iris.target, random_state=0)
 grid_search.fit(X_train, y_train)
-# print 'Test set score: {:.2f}'.format(grid_search.score(X_test, y_test))
+print 'Test set score: {:.2f}'.format(grid_search.score(X_test, y_test))
 # sklearn has a class GridSearchCV which can abstracts away performing
 # a grid search. Fitting the data with grid search trains a model per combination
 # in the param grid. You can then use .score to test results with the model
 # it finds with the best parameter combination
 
 
-# print 'Best parameters: {}'.format(grid_search.best_params_)
-# print 'Best validation score: {:.2f}'.format(grid_search.best_score_)
+print 'Best parameters: {}'.format(grid_search.best_params_)
+print 'Best validation score: {:.2f}'.format(grid_search.best_score_)
 # It also stores the best validation score and the best parameters
 
 
-# print 'Best estimator:\n{}'.format(grid_search.best_estimator_)
+print 'Best estimator:\n{}'.format(grid_search.best_estimator_)
 # It also provides access to the model which performed the best on the validation set
 
 
 results = pd.DataFrame(grid_search.cv_results_)
-# display(results.head())
+display(results.head())
 # The grid search also contains all the data about the search in a dictionary
 # which can be converted to a data frame
 
 
 scores = np.array(results.mean_test_score).reshape(6, 6)
-# mglearn.tools.heatmap(
-#   scores,
-#   xlabel='gamma',
-#   xticklabels=param_grid['gamma'],
-#   ylabel='C',
-#   yticklabels=param_grid['C'],
-#   cmap='viridis',
-# )
-# plt.show()
+mglearn.tools.heatmap(
+  scores,
+  xlabel='gamma',
+  xticklabels=param_grid['gamma'],
+  ylabel='C',
+  yticklabels=param_grid['C'],
+  cmap='viridis',
+)
+plt.show()
 # Plots a grid with the mean test score for each combination
 # of parameters, as we see from the grid, the parameters greatly
 # influence the accuracy of SVC
 
 
-# fig, axes = plt.subplots(1, 3, figsize=(13, 5))
+fig, axes = plt.subplots(1, 3, figsize=(13, 5))
 param_grid_linear = {
   'C': np.linspace(1, 2, 6),
   'gamma': np.linspace(1, 2, 6),
@@ -157,21 +157,21 @@ param_grid_range = {
   'C': np.logspace(-3, 2, 6),
   'gamma': np.logspace(-7, -2, 6),
 }
-# for param_grid, ax in zip([param_grid_linear, param_grid_one_log, param_grid_range], axes):
-#   grid_search = GridSearchCV(SVC(), param_grid, cv=5)
-#   grid_search.fit(X_train, y_train)
-#   scores = grid_search.cv_results_['mean_test_score'].reshape(6, 6)
-#   scores_image = mglearn.tools.heatmap(
-#     scores,
-#     xlabel='gamma',
-#     ylabel='C',
-#     xticklabels=param_grid['gamma'],
-#     yticklabels=param_grid['C'],
-#     cmap='viridis',
-#     ax=ax
-#   )
-# plt.colorbar(scores_image, ax=axes.tolist())
-# plt.show()
+for param_grid, ax in zip([param_grid_linear, param_grid_one_log, param_grid_range], axes):
+  grid_search = GridSearchCV(SVC(), param_grid, cv=5)
+  grid_search.fit(X_train, y_train)
+  scores = grid_search.cv_results_['mean_test_score'].reshape(6, 6)
+  scores_image = mglearn.tools.heatmap(
+    scores,
+    xlabel='gamma',
+    ylabel='C',
+    xticklabels=param_grid['gamma'],
+    yticklabels=param_grid['C'],
+    cmap='viridis',
+    ax=ax
+  )
+plt.colorbar(scores_image, ax=axes.tolist())
+plt.show()
 # Plotting a grid with the different mean test scores
 # for ranges of the parameters that are not as helpful
 # as the example above
@@ -188,15 +188,15 @@ param_grid = [
     'gamma': POWERS_OF_TEN,
   },
 ]
-# print 'List of grids:\n{}'.format(param_grid)
+print 'List of grids:\n{}'.format(param_grid)
 grid_search = GridSearchCV(SVC(), param_grid, cv=5)
 grid_search.fit(X_train, y_train)
-# print 'Best parameters: {}'.format(grid_search.best_params_)
-# print 'Best cross-validation score: {:.2f}'.format(grid_search.best_score_)
+print 'Best parameters: {}'.format(grid_search.best_params_)
+print 'Best cross-validation score: {:.2f}'.format(grid_search.best_score_)
 # Best parameters: {'C': 100, 'kernel': 'rbf', 'gamma': 0.01}
 # Best cross-validation score: 0.97
-# results = pd.DataFrame(grid_search.cv_results_)
-# display(results.T)
+results = pd.DataFrame(grid_search.cv_results_)
+display(results.T)
 # You can also do grid-searches over parameter sets that are
 # not grids, just dictionaries with different settings
 # In this example, we examine when the kernel of the SVC is
@@ -208,14 +208,14 @@ param_grid = {
   'C': POWERS_OF_TEN,
   'gamma': POWERS_OF_TEN,
 }
-# scores = cross_val_score(
-#   GridSearchCV(SVC(), param_grid, cv=5),
-#   iris.data,
-#   iris.target,
-#   cv=5,
-# )
-# print 'Cross-validation scores: {}'.format(scores)
-# print 'Mean cross-validation score: {}'.format(scores.mean())
+scores = cross_val_score(
+  GridSearchCV(SVC(), param_grid, cv=5),
+  iris.data,
+  iris.target,
+  cv=5,
+)
+print 'Cross-validation scores: {}'.format(scores)
+print 'Mean cross-validation score: {}'.format(scores.mean())
 # This example uses cross_val_score and then a nested GridSearch
 # to perform a grid search on different splittings of the original data.
 # This is a good test of how the model generalizes to new data
@@ -252,15 +252,15 @@ def nested_cv(X, y, inner_cv, outer_cv, Classifier, parameter_grid):
   return np.array(outer_scores)
 
 
-# scores = nested_cv(
-#   iris.data,
-#   iris.target,
-#   StratifiedKFold(5),
-#   StratifiedKFold(5),
-#   SVC,
-#   ParameterGrid(param_grid),
-# )
-# print 'Cross validation scores:\n{}'.format(scores)
+scores = nested_cv(
+  iris.data,
+  iris.target,
+  StratifiedKFold(5),
+  StratifiedKFold(5),
+  SVC,
+  ParameterGrid(param_grid),
+)
+print 'Cross validation scores:\n{}'.format(scores)
 # Testing the implementation of nested cross validation
 
 

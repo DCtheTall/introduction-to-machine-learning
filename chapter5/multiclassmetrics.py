@@ -26,28 +26,28 @@ X_train, X_test, y_train, y_test = \
   train_test_split(digits['data'], digits['target'], random_state=0)
 lr = LogisticRegression().fit(X_train, y_train)
 pred = lr.predict(X_test)
-# print 'Accuracy: {:.3f}'.format(accuracy_score(y_test, pred))
-# print 'Confusion matrix:\n{}'.format(confusion_matrix(y_test, pred))
+print 'Accuracy: {:.3f}'.format(accuracy_score(y_test, pred))
+print 'Confusion matrix:\n{}'.format(confusion_matrix(y_test, pred))
 # Accuracy and confusion matrix for using logistic regression
 # to predict what number handwritten digits are
 
 
-# scores_image = mglearn.tools.heatmap(
-#   confusion_matrix(y_test, pred),
-#   xlabel='Predicted label',
-#   ylabel='True label',
-#   xticklabels=digits['target_names'],
-#   yticklabels=digits['target_names'],
-#   cmap=plt.cm.gray_r,
-#   fmt='%d',
-# )
-# plt.title('Confusion matrix')
-# plt.gca().invert_yaxis()
-# plt.show()
+scores_image = mglearn.tools.heatmap(
+  confusion_matrix(y_test, pred),
+  xlabel='Predicted label',
+  ylabel='True label',
+  xticklabels=digits['target_names'],
+  yticklabels=digits['target_names'],
+  cmap=plt.cm.gray_r,
+  fmt='%d',
+)
+plt.title('Confusion matrix')
+plt.gca().invert_yaxis()
+plt.show()
 # Plots heatmap of the confusion matrix for this classification model
 
 
-# print classification_report(y_test, pred)
+print classification_report(y_test, pred)
 # Prints the classification report for the model
 
 
