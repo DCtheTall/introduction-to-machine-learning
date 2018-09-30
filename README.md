@@ -326,4 +326,93 @@ It also compares how the different algorithms cluster face image data.
 
 ----
 
-TODO Chapter 4-8
+## Chapter 4
+### Representing Data and Engineering Features
+
+This chapter is broken into the following sections, each covered with a separate
+`.py` file. They are:
+
+1. [Categorical Variables](#categorical-variables)
+2. [Binning](#binning)
+3. [Interactions and Polynomials](#interactions-and-polynomials)
+4. [Univariate Nonlinear Transfromations](#univariate-nonlinear-transformations)
+5. [Automatic Feature Selection](#automatic-feature-selection)
+6. [Utilizing Expert Knowledge](#utilizing-expert-knowledge)
+
+#### Categorical Variables
+
+Categorical variables are variables which can be only a discrete set of values,
+in opposition to continuous variables, which can be a range of real-valued
+numbers.
+
+Categorical variables are usually stored as enumerable string variables in the
+data. `pandas` provides a way to convert string-valued features into integer
+values using `pd.get_dummies` before training a model.
+
+One can also typecast any numerical features to string and have them treated
+as categorical variables as well. This works under the assumption the numerical-valued
+feature can only be a discrete number of values.
+
+One can see examples of how to treat categorical variables in `categoricalvars.py`.
+
+#### Binning
+
+Given a real-valued input feature which can be a continuous
+range of values, _binning_ is a method of discretizing the continuous feature
+into a discrete number of bins, or ranges of values.
+
+Binning helps linear models perform slightly better, though it does
+make decision trees perform worse.
+
+`binning.py` contains an example of using `numpy` to bin a continuous input feature
+and how it influences linear models' and decision trees' performance.
+
+#### Interactions and Polynomials
+
+`polynomials.py` shows an example of adding addition polynomial features to
+a dataset to improve the performance of some linear models.
+
+Polynomial features are usually existing numerical features which are
+then multiplied and cross multiplied to construct polynomials.
+
+It also shows that support vector machines predict the original feature
+set with a higher accuracy than `LinearRegression`. It also shows
+how the `Ridge` regressor improves when using polynomial features.
+
+#### Univariate Nonlinear Transfromations
+
+`nonlinear.py` has an example of how non-linear transformations,
+in this case _log_, can improve model performance on certain
+datasets.
+
+#### Automatic Feature Selection
+
+Automatic feature selection refers to the elimination of features based on
+their relevance to the output of the data.
+
+`autofeatureselection.py` covers 3 different methods of feature selection:
+
+The first is with `SelectPercentile` which filters only the features
+which are important for classification up to the selected percentile
+of features. The importance is computed using univariate statistics.
+
+The second is `SelectFromModel` which uses a selected model to determine how
+important features are for classification, then filters the features accordingly.
+
+The final one is Recursive Feature Elimination (`RFE`) recursively trains a
+model and filters the least important ones over and over until it reduces
+the feature set to a specified size. This method is more computationally
+expensive than the other methods due to the need to train multiple models.
+
+#### Utilizing Expert Knowledge
+
+In `expertknowledge.py`, we see an example anaylsis on Citi Bike data to predict
+the number of available bikes.
+
+This section highlights how one can pick features that we know for subjective
+reasons will be important for predictions, and using them to improve
+model performance.
+
+---
+
+TODO Chapter 5-8

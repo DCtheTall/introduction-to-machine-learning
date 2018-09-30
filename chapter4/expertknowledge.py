@@ -16,18 +16,18 @@ from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures
 
 
 citibike = mglearn.datasets.load_citibike()
-# print 'Citi Bike data:\n{}'.format(citibike.head())
+print 'Citi Bike data:\n{}'.format(citibike.head())
 # Loading publicly available Citi Bike data
 
 
-# plt.figure(figsize=(10, 3))
+plt.figure(figsize=(10, 3))
 xticks = pd.date_range(
   start=citibike.index.min(), end=citibike.index.max(), freq='D')
-# plt.xticks(xticks, xticks.strftime('%a %m-%d'), rotation=90, ha='left')
-# plt.plot(citibike, linewidth=1)
-# plt.xlabel('Date')
-# plt.ylabel('Rentals')
-# plt.show()
+plt.xticks(xticks, xticks.strftime('%a %m-%d'), rotation=90, ha='left')
+plt.plot(citibike, linewidth=1)
+plt.xlabel('Date')
+plt.ylabel('Rentals')
+plt.show()
 # Plot of Citi Bike rentals over time during August 2015
 
 
@@ -66,14 +66,14 @@ def eval_on_features(features, target, regressor):
 
 
 regressor = RandomForestRegressor(n_estimators=100, random_state=0)
-# eval_on_features(X, y, regressor)
+eval_on_features(X, y, regressor)
 # The random forest fails to make accurate predictions
 # the R^2 score is -0.04, no learning occurred
 # The POSIX time is not a useful feature
 
 
 X_hour = citibike.index.hour.values.reshape(-1, 1)
-# eval_on_features(X_hour, y, regressor)
+eval_on_features(X_hour, y, regressor)
 # Using the hour of the day as a feature yielded better
 # results, an R^2 score of 0.60
 
@@ -82,12 +82,12 @@ X_hour_week = np.hstack([
   citibike.index.dayofweek.values.reshape(-1, 1),
   citibike.index.hour.values.reshape(-1, 1),
 ])
-# eval_on_features(X_hour_week, y, regressor)
+eval_on_features(X_hour_week, y, regressor)
 # Adding the day of the week also helped improve the accuracy
 # this time we got an R^2 score of 0.84
 
 
-# eval_on_features(X_hour_week, y, LinearRegression())
+eval_on_features(X_hour_week, y, LinearRegression())
 # Using a linear model yielded an R^2 score of 0.13, not very good
 # this is because linear models assume features are continuous,
 # not categorical
