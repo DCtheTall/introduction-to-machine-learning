@@ -426,7 +426,7 @@ The sections of this chapter are broken down into:
 
 1. [Cross Validation](#cross-validation)
 2. [Grid Search](#grid-search)
-3. [Model Evaluation](#evaluation-metrics)
+3. [Model Evaluation](#model-evaluation)
 4. [Multiclass Metrics](#multiclass-metrics)
 5. [Model Selection](#model-selection)
 
