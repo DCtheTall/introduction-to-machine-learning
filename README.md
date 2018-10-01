@@ -507,11 +507,8 @@ Suggested reading on the topics covered in chapter 5:
 ## Chapter 6
 ### Algorithm Chains and Pipelines
 
-This chapter is broken into 3 separate sections covered by separate `.py` files. They are:
-
-1. [Parameter Selection](#parameter-selection)
-2. [Pipelines](#pipelines)
-3. [Grid Search](#grid-search)
+This chapter is broken into 3 separate sections covered by separate `.py` files.
+They are listed below:
 
 #### Parameter Selection
 
