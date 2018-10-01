@@ -27,7 +27,7 @@ X_train_scaled = scaler.transform(X_train)
 svm = SVC()
 svm.fit(X_train_scaled, y_train)
 X_test_scaled = scaler.transform(X_test)
-# print 'Test score: {:.3f}'.format(svm.score(X_test_scaled, y_test))
+print 'Test score: {:.3f}'.format(svm.score(X_test_scaled, y_test))
 # Example of using MinMaxScaler to preprocess cancer data and train
 # an kernelized SVM
 
@@ -38,9 +38,9 @@ param_grid = {
 }
 grid = GridSearchCV(SVC(), param_grid=param_grid, cv=5)
 grid.fit(X_train_scaled, y_train)
-# print 'Best cross-validation accuracy: {:.2f}'.format(grid.best_score_)
-# print 'Best parameters: {}'.format(grid.best_params_)
-# print 'Test set accuracy: {:.2f}'.format(grid.score(X_test_scaled, y_test))
+print 'Best cross-validation accuracy: {:.2f}'.format(grid.best_score_)
+print 'Best parameters: {}'.format(grid.best_params_)
+print 'Test set accuracy: {:.2f}'.format(grid.score(X_test_scaled, y_test))
 # Example of using grid search to select parameters after scaling the data.
 # The catch here is that the grid search splits the training set to test
 # for the best parameters. But the scaling used all of the training set,
@@ -48,6 +48,6 @@ grid.fit(X_train_scaled, y_train)
 # This training data has been included in the scaling
 
 
-# mglearn.plots.plot_improper_processing()
-# plt.show()
+mglearn.plots.plot_improper_processing()
+plt.show()
 # This figure is an illustration of the incosistency described above

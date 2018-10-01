@@ -498,6 +498,43 @@ metric to select a model which classifies handwritten digits as 9's or any other
 (an example of an imbalanced dataset). It also illustrates how accuracy is not a good
 success metric for this particular problem.
 
+Suggested reading on the topics covered in chapter 5:
+
+- [Data Science for Business](https://www.amazon.com/Data-Science-Business-Data-Analytic-Thinking/dp/1449361323) by Provost and Fawcett
+
 ---
 
-TODO Chapter 6-8
+## Chapter 6
+### Algorithm Chains and Pipelines
+
+This chapter is broken into 3 separate sections covered by separate `.py` files. They are:
+
+1. [Parameter Selection](#parameter-selection)
+2. [Pipelines](#pipelines)
+3. [Grid Search](#grid-search)
+
+#### Parameter Selection
+
+`paramselection.py` shows an example of how scaling the data before doing cross-validation
+and how it can lead to errors in the analysis of a model. Since preprocessing transformations
+are fit using the same data used for cross-validation, the metrics provided by a CV analysis
+may not accurately reflect how a model processes new data.
+
+#### Pipelines
+
+`pipelines.py` provides a solution to this problem. Pipelines are an interface provided by
+`sklearn` to chain together multiple steps in a model from proprocesing to making actual
+predictions using a supervised model.
+
+The program has examples of creating pipelines using the `Pipeline` interface's constructor
+function or using the more concise `make_pipeline` function, both in the `sklearn.pipeline`
+module.
+
+#### Grid Search
+
+`gridsearch.py` contains an example of doing a grid search analysis on an algorithm pipeline.
+The program contains examples of tuning parameters at different steps in the pipeline.
+
+---
+
+TODO Chapter 7, 8

@@ -38,31 +38,31 @@ param_grid = {
 grid = GridSearchCV(
   pipe, param_grid=param_grid, cv=5)
 grid.fit(X_train, y_train)
-# plt.matshow(
-#   grid.cv_results_['mean_test_score'].reshape(3, -1),
-#   vmin=0,
-#   cmap='viridis',
-# )
-# plt.xlabel('ridge__alpha')
-# plt.ylabel('polynomialfeatures__degree')
-# plt.xticks(
-#   range(len(param_grid['ridge__alpha'])),
-#   param_grid['ridge__alpha'],
-# )
-# plt.yticks(
-#     range(len(param_grid['polynomialfeatures__degree'])),
-#   param_grid['polynomialfeatures__degree'],
-# )
-# plt.colorbar()
-# plt.show()
+plt.matshow(
+  grid.cv_results_['mean_test_score'].reshape(3, -1),
+  vmin=0,
+  cmap='viridis',
+)
+plt.xlabel('ridge__alpha')
+plt.ylabel('polynomialfeatures__degree')
+plt.xticks(
+  range(len(param_grid['ridge__alpha'])),
+  param_grid['ridge__alpha'],
+)
+plt.yticks(
+    range(len(param_grid['polynomialfeatures__degree'])),
+  param_grid['polynomialfeatures__degree'],
+)
+plt.colorbar()
+plt.show()
 # Plot a heatmap comparing performance across
 # different combinations of features in the different
 # steps
 
 
-# print 'Best parameters: {}'.format(grid.best_params_)
+print 'Best parameters: {}'.format(grid.best_params_)
 # {'ridge__alpha': 10, 'polynomialfeatures__degree': 2}
-# print 'Test set score: {:.2f}'.format(grid.score(X_test, y_test))
+print 'Test set score: {:.2f}'.format(grid.score(X_test, y_test))
 # Scores 0.77
 # Printing some attributes of the grid search on the pipeline
 
@@ -71,7 +71,7 @@ param_grid = {'ridge__alpha': POWERS_OF_TEN}
 pipe = make_pipeline(StandardScaler(), Ridge())
 grid = GridSearchCV(pipe, param_grid, cv=5)
 grid.fit(X_train, y_train)
-# print 'Score without poly features: {:.2f}'.format(grid.score(X_test, y_test))
+print 'Score without poly features: {:.2f}'.format(grid.score(X_test, y_test))
 # Without polynomial features the model does worse, only 0.63
 
 
@@ -97,9 +97,9 @@ X_train, X_test, y_train, y_test = \
   train_test_split(cancer['data'], cancer['target'], random_state=0)
 grid = GridSearchCV(pipe, param_grid, cv=5)
 grid.fit(X_train, y_train)
-# print 'Best params:\n{}'.format(grid.best_params_)
-# print 'Best cross-validation score: {:.2f}'.format(grid.best_score_)
-# print 'Test-set score: {:.2f}'.format(grid.score(X_test, y_test))
+print 'Best params:\n{}'.format(grid.best_params_)
+print 'Best cross-validation score: {:.2f}'.format(grid.best_score_)
+print 'Test-set score: {:.2f}'.format(grid.score(X_test, y_test))
 # This grid search compares using a random forest classifier with
 # a varied max_features parameter against a SVC with the data
 # scaled using standard scaler.

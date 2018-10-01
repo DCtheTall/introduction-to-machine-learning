@@ -33,7 +33,7 @@ pipe = Pipeline([
   ('svm', SVC()),
 ])
 pipe.fit(X_train, y_train)
-# print 'Test score: {:.3f}'.format(pipe.score(X_test, y_test))
+print 'Test score: {:.3f}'.format(pipe.score(X_test, y_test))
 # This result is identical to applying MinMaxScaler to the
 # training and test set and then scoring it using the kernelized SVM
 
@@ -45,16 +45,16 @@ param_grid = {
 }
 grid = GridSearchCV(pipe, param_grid=param_grid, cv=5)
 grid.fit(X_train, y_train)
-# print 'Best cross-validation: {:.3f}'.format(grid.best_score_)
-# print 'Test set score: {:.3f}'.format(grid.score(X_test, y_test))
-# print 'Best parameters: {}'.format(grid.best_params_)
+print 'Best cross-validation: {:.3f}'.format(grid.best_score_)
+print 'Test set score: {:.3f}'.format(grid.score(X_test, y_test))
+print 'Best parameters: {}'.format(grid.best_params_)
 # Here, the scaling is done properly during the grid search, instead
 # of the whole training set being used, it uses the part of the
 # training set it uses for training the different models for cross validation
 
 
-# mglearn.plots.plot_proper_processing()
-# plt.show()
+mglearn.plots.plot_proper_processing()
+plt.show()
 # Illustration of proper preprocessing
 
 
@@ -68,10 +68,10 @@ y = rnd.normal(size=(100,))
 
 select = SelectPercentile(score_func=f_regression, percentile=5).fit(X, y)
 X_selected = select.transform(X)
-# print 'X_selected.shape: {}'.format(X_selected.shape)
+print 'X_selected.shape: {}'.format(X_selected.shape)
 # first select the most 500 relevant features
-# print 'Cross validation accuracy (cv only on Ridge): {:.3f}'.format(
-#   np.mean(cross_val_score(Ridge(), X_selected, y, cv=5)))
+print 'Cross validation accuracy (cv only on Ridge): {:.3f}'.format(
+  np.mean(cross_val_score(Ridge(), X_selected, y, cv=5)))
 # The R^2 score is 0.91, this cannot be right since the data is just random.
 # This is because we did preprocessing on the data outside the cross
 # validation.
@@ -81,8 +81,8 @@ pipe = Pipeline([
   ('select', SelectPercentile(score_func=f_regression, percentile=5)),
   ('ridge', Ridge()),
 ])
-# print 'Cross validation score accuracy (pipeline): {:.3f}'.format(
-#   np.mean(cross_val_score(pipe, X, y, cv=5)))
+print 'Cross validation score accuracy (pipeline): {:.3f}'.format(
+  np.mean(cross_val_score(pipe, X, y, cv=5)))
 # Here the R^2 score is -0.25, indicating a bad model, which is correct
 
 
@@ -121,7 +121,7 @@ pipe_long = Pipeline([
 ])
 # Abbreviated syntax
 pipe_short = make_pipeline(MinMaxScaler(), SVC(C=100))
-# print 'Pipleline steps:\n{}'.format(pipe_short.steps)
+print 'Pipleline steps:\n{}'.format(pipe_short.steps)
 # Has automatic naming
 
 
@@ -130,13 +130,13 @@ pipe = make_pipeline(
   PCA(n_components=2),
   StandardScaler(),
 )
-# print 'Pipeline steps:\n{}'.format(pipe.steps)
+print 'Pipeline steps:\n{}'.format(pipe.steps)
 # Numbers are attached when the same type of estimator is used
 
 
 pipe.fit(cancer['data'])
 components = pipe.named_steps['pca'].components_
-# print 'components.shape: {}'.format(components.shape)
+print 'components.shape: {}'.format(components.shape)
 # You can access the estimates at any step in the pipeline
 
 
@@ -147,17 +147,17 @@ X_train, X_test, y_train, y_test = \
   train_test_split(cancer['data'], cancer['target'], random_state=4)
 grid = GridSearchCV(pipe, param_grid, cv=5)
 grid.fit(X_train, y_train)
-# print 'Best estimator:\n{}'.format(grid.best_estimator_)
+print 'Best estimator:\n{}'.format(grid.best_estimator_)
 # You can run grid search on piplelines and then get the pipeline
 # with the best performance on the training and validation step
 
 
-# print 'Logistic regression step:\n{}'.format(
-#   grid.best_estimator_.named_steps['logisticregression'])
+print 'Logistic regression step:\n{}'.format(
+  grid.best_estimator_.named_steps['logisticregression'])
 # You also have access to each step in the best performing pipeline
 
 
-# print 'Logistic regression coefficients:\n{}'.format(
-#   grid.best_estimator_.named_steps['logisticregression'].coef_)
+print 'Logistic regression coefficients:\n{}'.format(
+  grid.best_estimator_.named_steps['logisticregression'].coef_)
 # Also printing the coefficients for each feature in the dataset for the
 # best performing logisticregression
