@@ -50,9 +50,9 @@ def compare_normalizations(doc):
   print 'Stemming:\n{}'.format(
     [stemmer.stem(token.norm_.lower()) for token in doc_spacy])
 
-# compare_normalizations(
-#   u'Our meeting today was worse than yesterday, '
-#   'I\'m scared of meeting the clients tomorrow.')
+compare_normalizations(
+  u'Our meeting today was worse than yesterday, '
+  'I\'m scared of meeting the clients tomorrow.')
 # Comparing the normalization process done by lemmatization,
 # i.e. reducing it to tokens based on their context in the sentence,
 # versus stemming, which is tokenizing by the root of the word
@@ -73,9 +73,9 @@ def custom_tokenizer(document):
 
 lemma_vect = CountVectorizer(tokenizer=custom_tokenizer, min_df=5)
 X_train_lemma = lemma_vect.fit_transform(text_train)
-# print 'X_train_lemma.shape: {}'.format(X_train_lemma.shape)
+print 'X_train_lemma.shape: {}'.format(X_train_lemma.shape)
 X_train = CountVectorizer(min_df=5).fit_transform(text_train)
-# print 'X_train.shape: {}'.format(X_train.shape)
+print 'X_train.shape: {}'.format(X_train.shape)
 # Lemmatization reduces the number of features taken into consideration
 # X_train_lemma.shape: (25000, 21558)
 # X_train.shape: (25000, 27271)

@@ -249,7 +249,7 @@ X_train_scaled = (X_train - min_on_training) / range_on_training
 
 where `X_train` is the data used to train the transformer.
 
-#### Principal Component Anaylsis
+#### Principal Component Analysis
 
 Principal Component Analysis (PCA) is a technique to reduce a high dimensional
 dataset into a feature vector with a specified number of components.
@@ -379,7 +379,7 @@ It also shows that support vector machines predict the original feature
 set with a higher accuracy than `LinearRegression`. It also shows
 how the `Ridge` regressor improves when using polynomial features.
 
-#### Univariate Nonlinear Transfromations
+#### Univariate Nonlinear Transformations
 
 `nonlinear.py` has an example of how non-linear transformations,
 in this case _log_, can improve model performance on certain
@@ -534,4 +534,75 @@ The program contains examples of tuning parameters at different steps in the pip
 
 ---
 
-TODO Chapter 7, 8
+## Chapter 7
+### Working with Text Data
+
+This chapter covers sentiment analysis on a dataset of IMDb movie reviews.
+We look at 25,000 movie reviews and cover training a model to classify
+if a movie review is positive or negative.
+
+The chapter is broken down into separate programs into the following sections:
+
+1. [Movie Reviews](#movie-reviews)
+2. [Bag of Words](#bag-of-words)
+3. [Tokenization](#tokenization)
+4. [Latent Dirichlet Allocation](#latent-dirichlet-allocation)
+
+#### Movie Reviews
+
+`moviereviews.py` contains the bulk of the material from the first half of the chapter.
+
+It provides an example of representing the feature set using the `CountVectorizer` class
+in the `sklearn.feature_extraction.text` which constructs the _count vector_ of each review,
+or a sparse matrix representation of the number of times a word appears in each review.
+This count vector can be used to train a linear model to make predictions that are 88% accurate.
+
+The count vector can set a `min_df` parameter to set the _minimum document frequency_ that each
+word needs to have to be considered part of the input feature. Another method of increasing accuracy
+is to exclude _stop words_, common English words that are not relevant to the overall meaning of the
+review.
+
+It also shows an example of using the `TfidfVectorizer`, a class exported by `sklearn.feature_extraction.text`
+which creates term vectors where each component is the Term Frequency Inverse Document Frequency (tf-idf)
+which is given by:
+
+```
+tfidf(w) = tf(w) * log((N + 1) / (N_w + 1)) + 1
+```
+
+where `tf` is the term frequency of the word in each review (how many times the word is in that
+particular review), `N` is the documents in the dataset and `N_w` is number of documents with
+the word `w`.
+
+The program also does a grid search tuning the `ngram_range` which sets the maximum _n_-gram size
+the model takes into consideration. A single word is a 1-gram, a combination of two words in the
+order they appear in the document is a 2-gram, and so on.
+
+#### Bag of Words
+
+`bagofwords.py` is a supplemental program to `moviereviews.py`. It has examples of using the
+`CountVectorizer` class and tuning the _n_-gram range.
+
+#### Tokenization
+
+`tokenization.py` contains examples of two different types of _tokenization_, or a method
+of grouping together similar words based on their syntactical root or context in a sentence.
+
+_Stemming_ is a form of tokenization where words are broken down into their syntatical stem. For example,
+the word 'replace' might have the stem 'replac' and any form with this stem is recognized as an instance
+of the same token. This is implemented in the program using the `nltk.stem.PorterStemmer` from the `nltk`
+module.
+
+_Lemmatization_ is another form of tokenization which also takes the word's context in the sentence
+into consideration. It is implemented with the `spacy` module to determine the tokenization of the
+document. We see that lemmatization can add a modest boost in performance when training our model.
+
+#### Latent Dirichlet Allocation
+
+Latent Dirichlet Allocation is a method of sorting text data by topic. LDA determines how to classify
+the text data by topic. One can see what words belong to what topics and how many documents fit
+into each topic. There are examples of this process in `latentdirichlet.py`.
+
+---
+
+TODO Chapter 8

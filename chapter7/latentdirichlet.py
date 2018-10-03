@@ -29,25 +29,25 @@ text_test = repl_br_tags(text_test)
 
 vect = CountVectorizer(max_features=10000, max_df=.15)
 X = vect.fit_transform(text_train)
-# lda = LatentDirichletAllocation(
-#   n_topics=10, learning_method='batch', max_iter=25, random_state=0)
-# document_topics = lda.fit_transform(X)
-# print 'lda.components_.shape: {}'.format(lda.components_.shape)
+lda = LatentDirichletAllocation(
+  n_topics=10, learning_method='batch', max_iter=25, random_state=0)
+document_topics = lda.fit_transform(X)
+print 'lda.components_.shape: {}'.format(lda.components_.shape)
 # Prints the shape of the components of the LDA, there are
 # (num topics * num words) components, each one is a vector
 # representation of each topic where the components are
 # the frequency of each word in each topic
 
 
-# sorting = np.argsort(lda.components_, axis=1)[:, ::-1]
-# feature_names = np.array(vect.get_feature_names())
-# mglearn.tools.print_topics(
-#   topics=range(10),
-#   feature_names=feature_names,
-#   sorting=sorting,
-#   topics_per_chunk=5,
-#   n_words=10,
-# )
+sorting = np.argsort(lda.components_, axis=1)[:, ::-1]
+feature_names = np.array(vect.get_feature_names())
+mglearn.tools.print_topics(
+  topics=range(10),
+  feature_names=feature_names,
+  sorting=sorting,
+  topics_per_chunk=5,
+  n_words=10,
+)
 # Prints the 10 topics it divided the reviews into
 # and the 10 most frequent words in each topic
 # Some topics do seem to be genre specific though
@@ -75,9 +75,9 @@ mglearn.tools.print_topics(
 )
 
 
-# music = np.argsort(document_topics100[:, 45])[::-1]
-# for i in music[:10]:
-#   print b''.join(text_train[i].split(b'.')[:2]) + b'\n'
+music = np.argsort(document_topics100[:, 45])[::-1]
+for i in music[:10]:
+  print b''.join(text_train[i].split(b'.')[:2]) + b'\n'
 # Prints positive movies about music, showing how
 
 
