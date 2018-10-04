@@ -617,7 +617,7 @@ Suggested Reading:
 - [Bandit Algorithms for Website Optimization](https://www.amazon.com/Bandit-Algorithms-Website-Optimization-Developing/dp/1449341330) by John Myles White
 - [The Elements of Statistical Learning](https://www.amazon.com/gp/product/0387848576/ref=ox_sc_saved_title_1?smid=ATVPDKIKX0DER&psc=1) by Hastie, Tibshirani, and Friedman
 - [Machine Learning: An Algorithmic Perspective](https://www.amazon.com/Machine-Learning-Algorithmic-Perspective-Recognition/dp/1420067184) by Stephen Marshland
-- [Machine Learning: A Probabalistic Perspective](https://www.amazon.com/gp/product/0262018020/ref=ox_sc_saved_title_2?smid=ATVPDKIKX0DER&psc=1) by Stephen Marsland
+- [Machine Learning: A Probabalistic Perspective](https://www.amazon.com/gp/product/0262018020/ref=ox_sc_saved_title_2?smid=ATVPDKIKX0DER&psc=1) by Kevin Murphy
 - [Pattern Recognition and Machine Learning](https://www.amazon.com/gp/product/B07CMM4TWS/ref=dbs_a_def_rwt_hsch_vapi_tkin_p1_i0) by Christopher Bishop
 - [Introduction to Information Retrieval](https://www.amazon.com/Introduction-Information-Retrieval-Christopher-Manning/dp/0521865719) by Manning, Raghavan, and Schutze
 - [Deep Learning](https://www.amazon.com/gp/product/0262035618/ref=ox_sc_saved_title_5?smid=A10K3X0OCF2LSA&psc=1) by Goodfellow, Bengio, and Courville
